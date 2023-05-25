@@ -1,0 +1,12 @@
+.about-banner {
+    background-image: url(../../../assets//home/chef-service.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    padding: 119px 112px;
+}
+
+.about-banner-content {
+    background-color: white;
+    padding: 96px 167px;
+}
