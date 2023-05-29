@@ -4,13 +4,13 @@ const Navbar = () => {
   const navOptions = (
     <>
       <li>
-        <Link to='/' className="inter uppercase font-bold">Home</Link>
+        <Link to='/' className="inter uppercase font-bold text-white">Home</Link>
       </li>
       <li>
-        <Link to={'/menu'} className="inter uppercase font-bold">Our Menu</Link>
+        <Link to={'/menu'} className="inter uppercase font-bold text-white">Our Menu</Link>
       </li>
       <li>
-        <a>Item 3</a>
+        <Link to={'/order/salad'} className="inter uppercase font-bold text-white">Order</Link>
       </li>
     </>
   );
@@ -40,7 +40,7 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >{navOptions}</ul>
         </div>
-        <a className="text-xl uppercase">Bistro Boss <br /><span>Restaurant</span></a>
+        <a className="text-xl uppercase text-white">Bistro Boss <br /><span>Restaurant</span></a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
