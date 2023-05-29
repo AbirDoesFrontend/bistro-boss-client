@@ -12,6 +12,9 @@ const Navbar = () => {
       <li>
         <Link to={'/order/salad'} className="inter uppercase font-bold text-white">Order</Link>
       </li>
+      <li>
+        <Link to={'/login'} className="inter uppercase font-bold text-white">Login</Link>
+      </li>
     </>
   );
 
