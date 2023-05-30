@@ -1,19 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authLogo from "../../assets/others/authentication2.png";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const { createUser } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const { createUser ,updateUserProfile } = useContext(AuthContext)
 
   const onSubmit = (data) => {
     console.log(data);
@@ -22,6 +26,17 @@ const SignUp = () => {
         const loggedUser = result.user;
         console.log(loggedUser)
     })
+    updateUserProfile(data.name , data.photoUrl)
+    .then(() => {
+        reset()
+        Swal.fire(
+          'Sign Up Successful',
+          'You clicked the button!',
+          'success'
+        )
+        navigate('/')
+    })
+    .catch(error => console.log(error.message))
   };
 
   return (
@@ -54,6 +69,23 @@ const SignUp = () => {
                 {errors.name && (
                   <span className="text-red-600 mt-2 inter">
                     Name is required
+                  </span>
+                )}
+              </div>
+              <div className="form-control inter">
+                <label className="label">
+                  <span className="label-text inter">Photo Url</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("photoUrl", { required: true })}
+                  name="photoUrl"
+                  placeholder="photo url"
+                  className="input input-bordered"
+                />
+                {errors.photoUrl && (
+                  <span className="text-red-600 mt-2 inter">
+                    PhotoUrl is required
                   </span>
                 )}
               </div>

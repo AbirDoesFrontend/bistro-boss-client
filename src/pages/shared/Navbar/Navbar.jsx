@@ -29,6 +29,14 @@ const Navbar = () => {
           Order
         </Link>
       </li>
+      <li>
+        <Link
+          to={"/secret"}
+          className="inter uppercase font-bold text-white"
+        >
+          Secret
+        </Link>
+      </li>
       {user ? (
         <>
           <li>
