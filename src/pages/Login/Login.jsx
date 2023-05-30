@@ -6,17 +6,17 @@ import {
 
 import authLogo from "../../assets/others/authentication2.png";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
+  const captchaRef = useRef(null);
 
-    const captchaRef = useRef(null)
+  const [disabled, setDisabled] = useState(true);
 
-    const [disabled, setDisabled] = useState(true)
-
-    useEffect(() => {
-      loadCaptchaEnginge(6)
-    }, [])
-    
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -32,15 +32,20 @@ const Login = () => {
 
   const handleCaptchaValidate = () => {
     const value = captchaRef.current.value;
-    if(validateCaptcha(value)) {
-        setDisabled(false)
+    if (validateCaptcha(value)) {
+      setDisabled(false);
     } else {
-        setDisabled(true)
+      setDisabled(true);
     }
-  }
+  };
 
   return (
     <div>
+      <Helmet>
+        <title>
+          Bistro Boss | Login
+        </title>
+      </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row w-1/2">
           <div>
@@ -84,7 +89,12 @@ const Login = () => {
                   placeholder="Type the text above"
                   ref={captchaRef}
                 />
-                <button className="btn btn-outline btn-xs mt-5 inter" onClick={handleCaptchaValidate}>Validate</button>   
+                <button
+                  className="btn btn-outline btn-xs mt-5 inter"
+                  onClick={handleCaptchaValidate}
+                >
+                  Validate
+                </button>
               </div>
               <div className="form-control mt-6">
                 <input
@@ -94,6 +104,11 @@ const Login = () => {
                   disabled={disabled}
                 />
               </div>
+              <p>
+                <small className="inter">
+                  New Here? <Link to={"/signup"} className="inter">Creat an account</Link>
+                </small>
+              </p>
             </div>
           </form>
         </div>
