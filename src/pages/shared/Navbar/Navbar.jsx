@@ -1,20 +1,52 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthProvider";
 
 const Navbar = () => {
+  const { user , logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+  }
+
   const navOptions = (
     <>
       <li>
-        <Link to='/' className="inter uppercase font-bold text-white">Home</Link>
+        <Link to="/" className="inter uppercase font-bold text-white">
+          Home
+        </Link>
       </li>
       <li>
-        <Link to={'/menu'} className="inter uppercase font-bold text-white">Our Menu</Link>
+        <Link to={"/menu"} className="inter uppercase font-bold text-white">
+          Our Menu
+        </Link>
       </li>
       <li>
-        <Link to={'/order/salad'} className="inter uppercase font-bold text-white">Order</Link>
+        <Link
+          to={"/order/salad"}
+          className="inter uppercase font-bold text-white"
+        >
+          Order
+        </Link>
       </li>
-      <li>
-        <Link to={'/login'} className="inter uppercase font-bold text-white">Login</Link>
-      </li>
+      {user ? (
+        <>
+          <li>
+            <button onClick={handleLogOut} className="btn btn-ghost inter text-white font-bold">Logout</button>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link
+              to={"/login"}
+              className="inter uppercase font-bold text-white"
+            >
+              Login
+            </Link>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -41,14 +73,17 @@ const Navbar = () => {
           <ul
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >{navOptions}</ul>
+          >
+            {navOptions}
+          </ul>
         </div>
-        <a className="text-xl uppercase text-white">Bistro Boss <br /><span>Restaurant</span></a>
+        <a className="text-xl uppercase text-white">
+          Bistro Boss <br />
+          <span>Restaurant</span>
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navOptions}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="navbar-end">
         <a className="btn">Get started</a>
