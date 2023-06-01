@@ -17,3 +17,11 @@
 .inter {
     font-family: 'Inter', sans-serif;
 }
+.drawer-side a {
+    color: black;
+    background-color: transparent;
+}
+
+.drawer-side a.active {
+    color: white;
+}

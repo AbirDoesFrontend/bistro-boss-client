@@ -40,7 +40,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link to={"/"} className="inter uppercase font-bold text-white">
+        <Link to={"/dashboard/mycart"} className="inter uppercase font-bold text-white">
           <button className="btn gap-2">
             <FaShoppingCart />
             <div className="badge badge-secondary inter">+{cart?.length || 0}</div>
