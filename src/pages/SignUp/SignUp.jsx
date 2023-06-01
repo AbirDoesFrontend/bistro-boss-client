@@ -28,13 +28,28 @@ const SignUp = () => {
     })
     updateUserProfile(data.name , data.photoUrl)
     .then(() => {
-        reset()
-        Swal.fire(
-          'Sign Up Successful',
-          'You clicked the button!',
-          'success'
-        )
-        navigate('/')
+
+        const saveUser = { name : data.name , email : data.email }
+
+        fetch('http://localhost:5000/users' , {
+          method : 'POST',
+          headers : {
+            'content-type' : 'application/json',
+          },
+          body : JSON.stringify(saveUser)
+        })
+        .then(res => res.json())
+        .then(data => {
+          if(data.insertedId) {
+            reset()
+            Swal.fire(
+              'Sign Up Successful',
+              'You clicked the button!',
+              'success'
+            )
+            navigate('/')
+          }
+        })
     })
     .catch(error => console.log(error.message))
   };
