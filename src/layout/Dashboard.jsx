@@ -5,8 +5,12 @@ import {
   FaCalendarAlt,
   FaHome,
 } from "react-icons/fa";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
+
+    const [cart] = useCart()
+
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -40,7 +44,7 @@ const Dashboard = () => {
           </li>
           <li className="uppercase">
             <NavLink to={"/dashboard/mycart"}>
-              <FaShoppingCart /> My Cart
+              <FaShoppingCart /> My Cart <span className="badge badge-secondary inter">+{cart?.length || 0}</span>
             </NavLink>
           </li>
           <div className="divider before:bg-white after:bg-white"></div>
