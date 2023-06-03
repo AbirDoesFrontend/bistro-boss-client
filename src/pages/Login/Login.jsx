@@ -10,16 +10,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../context/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const Login = () => {
-
-  const { signIn } = useContext(AuthContext)
+  const { signIn } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(true);
 
-  const navigate = useNavigate()
-  const location = useLocation()
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -32,31 +32,26 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    signIn(email , password)
-    .then(result => {
-      const loggedUser = result.user;
-      console.log(loggedUser)
-      Swal.fire(
-        'Logged In',
-        'Want to try some dishes?',
-        'success'
-      )
+    signIn(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        Swal.fire("Logged In", "Want to try some dishes?", "success");
 
-      navigate(from , { replace : true })
-    })
-    .catch(error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: `${error.message}`,
+        navigate(from, { replace: true });
       })
-    })
-
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
+      });
 
     form.reset();
   };
 
-  const handleCaptchaValidate = e => {
+  const handleCaptchaValidate = (e) => {
     const value = e.target.value;
     if (validateCaptcha(value)) {
       setDisabled(false);
@@ -68,17 +63,15 @@ const Login = () => {
   return (
     <div>
       <Helmet>
-        <title>
-          Bistro Boss | Login
-        </title>
+        <title>Bistro Boss | Login</title>
       </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row w-1/2">
           <div>
             <img src={authLogo} alt="" />
           </div>
+          <div className="card w-2/3 shadow-2xl bg-base-100">
           <form
-            className="card w-2/3 shadow-2xl bg-base-100"
             onSubmit={handleLogin}
           >
             <div className="card-body">
@@ -126,11 +119,16 @@ const Login = () => {
               </div>
               <p>
                 <small className="inter">
-                  New Here? <Link to={"/signup"} className="inter">Creat an account</Link>
+                  New Here?{" "}
+                  <Link to={"/signup"} className="inter">
+                    Creat an account
+                  </Link>
                 </small>
               </p>
             </div>
-          </form>
+            </form>
+          <SocialLogin />
+          </div>
         </div>
       </div>
     </div>
