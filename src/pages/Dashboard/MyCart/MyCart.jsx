@@ -2,9 +2,10 @@ import { Helmet } from "react-helmet-async";
 import useCart from "../../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
-  const [cart , refetch] = useCart();
+  const [cart, refetch] = useCart();
   const total = cart.reduce((sum, item) => item.price + sum, 0);
 
   const handleDelete = (item) => {
@@ -34,7 +35,7 @@ const MyCart = () => {
             .then((res) => res.json())
             .then((data) => {
               if (data.deletedCount > 0) {
-                refetch()
+                refetch();
                 swalWithBootstrapButtons.fire(
                   "Deleted!",
                   "Your order has been deleted.",
@@ -42,9 +43,7 @@ const MyCart = () => {
                 );
               }
             });
-        } else if (
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire(
             "Cancelled",
             "Your food order is safe :)",
@@ -61,7 +60,11 @@ const MyCart = () => {
       <div className="uppercase flex justify-evenly items-center mb-5">
         <h3 className="text-2xl">Total Orders : {cart.length}</h3>
         <h3 className="text-2xl">Total Price : ${total}</h3>
-        <button className="btn bg-[#d1a054] btn-warning text-black">pay</button>
+        <Link to={'/dashboard/payment'}>
+          <button className="btn bg-[#d1a054] btn-warning text-black">
+            pay
+          </button>
+        </Link>
       </div>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
